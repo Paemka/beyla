@@ -86,10 +86,10 @@ otelcol.exporter.prometheus "default" {
 
 prometheus.remote_write "mimir" {
   endpoint {
-    url = "https://" + env("MIMIR_ENDPOINT") + "/api/prom/push"
+    url = "https://" + sys.env("MIMIR_ENDPOINT") + "/api/prom/push"
     basic_auth {
-      username = env("MIMIR_USER")
-      password = env("GRAFANA_API_KEY")
+      username = sys.env("MIMIR_USER")
+      password = sys.env("GRAFANA_API_KEY")
     }
   }
 }
@@ -108,14 +108,14 @@ Finally, set up a [Grafana Tempo](/oss/tempo/) exporter and endpoint. The Alloy 
 ```alloy
 otelcol.exporter.otlp "tempo" {
     client {
-        endpoint = env("TEMPO_ENDPOINT")
+        endpoint = sys.env("TEMPO_ENDPOINT")
         auth     = otelcol.auth.basic.creds.handler
     }
 }
 
 otelcol.auth.basic "creds" {
-    username = env("TEMPO_USER")
-    password = env("GRAFANA_API_KEY")
+    username = sys.env("TEMPO_USER")
+    password = sys.env("GRAFANA_API_KEY")
 }
 ```
 
