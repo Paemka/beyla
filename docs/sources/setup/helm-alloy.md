@@ -180,8 +180,8 @@ prometheus.remote_write "rw" {
 		url = "https://prometheus-us-central1.grafana.net/api/prom/push"
 
 		basic_auth {
-			username = env("PROMETHEUS_REMOTE_WRITE_USERNAME")
-			password = env("PROMETHEUS_REMOTE_WRITE_PASSWORD")
+			username = sys.env("PROMETHEUS_REMOTE_WRITE_USERNAME")
+			password = sys.env("PROMETHEUS_REMOTE_WRITE_PASSWORD")
 		}
 	}
 }
@@ -194,8 +194,8 @@ otelcol.exporter.otlp "grafana_cloud_tempo" {
 }
 
 otelcol.auth.basic "grafana_cloud_tempo" {
-	username = env("TEMPO_REMOTE_WRITE_USERNAME")
-	password = env("TEMPO_REMOTE_WRITE_PASSWORD")
+	username = sys.env("TEMPO_REMOTE_WRITE_USERNAME")
+	password = sys.env("TEMPO_REMOTE_WRITE_PASSWORD")
 }
 ```
 
